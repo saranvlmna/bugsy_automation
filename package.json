@@ -2,11 +2,11 @@
   "name": "automation_testing_tool",
   "version": "1.0.0",
   "main": "server.js",
-"scripts": {
-  "build": "tsc",
-  "start": "node dist/server.js",
-  "dev": "nodemon src/server.ts"
-},
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saranvlmna/automation_testing_tool.git"
@@ -20,7 +20,8 @@
   "homepage": "https://github.com/saranvlmna/automation_testing_tool#readme",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "playwright": "^1.52.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",

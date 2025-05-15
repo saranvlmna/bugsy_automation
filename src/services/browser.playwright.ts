@@ -8,10 +8,10 @@ export default async (url: string) => {
     const page = await context.newPage();
     await page.goto(url);
 
-    const html = await page.content();
+    const imageBuffer = await page.screenshot();
     await browser.close();
 
-    return html;
+    return imageBuffer;
   } catch (error) {
     console.log(error);
     throw error;

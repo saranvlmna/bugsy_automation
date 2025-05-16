@@ -1,18 +1,20 @@
 import { Request, RequestHandler, Response } from "express";
-import browserPlaywright from "../services/browser.playwright";
+import browserPlaywright from "../services/browser";
+import fileUpload from "../services/file.upload";
+import llmAgent from "../services/llm.agent";
 
 export default (async (req: Request, res: Response) => {
   try {
     const { url } = req.body;
+    
     const imageBuffer = await browserPlaywright(url);
 
-    //TODO :
+    const fileUrl = await fileUpload(imageBuffer, "image/png");
 
-    // 1. Save the image buffer to blob storage
-    // 2. pass blob url to the openai llm
+    const response = await llmAgent(fileUrl);
 
     return res.status(200).json({
-      data: imageBuffer,
+      data: response,
     });
   } catch (error) {
     if (error instanceof Error) {

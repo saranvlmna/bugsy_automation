@@ -1,8 +1,11 @@
+import dotenv from "dotenv";
 import express from "express";
 import router from "./router";
 
+dotenv.config();
+
 const app = express();
-const port = 3000;
+const port = process.env.APP_PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

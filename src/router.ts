@@ -1,8 +1,8 @@
 import { Router } from "express";
-import testcaseWrite from "./controllers/testcase.write";
+import writeTestCase from "./controllers/testcase.write";
 
 const router = Router();
 
-router.post("/", testcaseWrite);
+router.post("/", writeTestCase);
 
 export default router;

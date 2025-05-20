@@ -11,10 +11,10 @@ export default (async (req: Request, res: Response) => {
 
     const fileUrl = await fileUpload(imageBuffer, "image/png");
 
-    const response = await llmAgent(fileUrl);
+    const testCase = await llmAgent(fileUrl);
 
     return res.status(200).json({
-      data: response,
+      data: testCase,
     });
   } catch (error) {
     if (error instanceof Error) {

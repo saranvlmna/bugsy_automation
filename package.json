@@ -12,13 +12,13 @@
     "url": "git+https://github.com/saranvlmna/automation_testing_tool.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Saranjith P",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/saranvlmna/automation_testing_tool/issues"
   },
   "homepage": "https://github.com/saranvlmna/automation_testing_tool#readme",
-  "description": "",
+  "description": "automation testing tool",
   "dependencies": {
     "@azure/storage-blob": "^12.27.0",
     "dotenv": "^16.5.0",

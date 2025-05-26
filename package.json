@@ -21,8 +21,10 @@
   "description": "automation testing tool",
   "dependencies": {
     "@azure/storage-blob": "^12.27.0",
+    "@langchain/openai": "^0.5.11",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "langchain": "^0.3.27",
     "openai": "^4.98.0",
     "playwright": "^1.52.0",
     "uuid": "^11.1.0"
@@ -31,6 +33,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.18",
     "nodemon": "^3.1.10",
+    "openapi-typescript": "^7.8.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

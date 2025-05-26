@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon server.ts"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
     "@langchain/openai": "^0.5.11",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "langchain": "^0.3.27",
     "openai": "^4.98.0",
     "playwright": "^1.52.0",
     "uuid": "^11.1.0"

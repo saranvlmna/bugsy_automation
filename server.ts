@@ -1,6 +1,7 @@
-import "./config/env";
 import express from "express";
-import router from "./router";
+import "./config/env";
+import systemRouter from "./src/system/router";
+
 const app = express();
 const port = process.env.APP_PORT || 3000;
 
@@ -11,7 +12,7 @@ app.get("/", (_req, res) => {
   res.send("hey server");
 });
 
-app.use("/testcase/", router);
+app.use("/", systemRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

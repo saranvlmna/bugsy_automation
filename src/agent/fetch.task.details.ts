@@ -1,12 +1,12 @@
 import { Request, RequestHandler, Response } from "express";
-import { bUseGetTask, bUseRunTask } from "../agent/lib";
+import { bUseGetTask } from "./lib";
 
 export default (async (req: Request, res: Response) => {
   try {
-    const { task } = req.body;
+    const { taskId } = req.query;
+    if (!taskId || typeof taskId != "string") throw new Error("Task ID is required");
 
-    const result = await bUseRunTask(task);
-    const taskDetails = await bUseGetTask(result.id,3);
+    const taskDetails = await bUseGetTask(taskId, 0);
 
     return res.status(200).json({
       data: taskDetails,

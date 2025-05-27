@@ -1,9 +1,10 @@
 import { Request, RequestHandler, Response } from "express";
-import { bUseRunTask } from "../agent/lib";
+import { bUseRunTask } from "./lib";
 
 export default (async (req: Request, res: Response) => {
   try {
     const { task } = req.body;
+
     const result = await bUseRunTask(task);
 
     return res.status(200).json({

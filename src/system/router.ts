@@ -4,7 +4,7 @@ import testcaseWrite from "./testcase.write";
 
 const systemRouter = Router();
 
-systemRouter.post("/", testcaseWrite);
-systemRouter.post("/testcaserun", testcaseRun);
+systemRouter.post("/testcase/write", testcaseWrite);
+systemRouter.post("/testcase/run", testcaseRun);
 
 export default systemRouter;

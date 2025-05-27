@@ -1,16 +1,16 @@
 import { Request, RequestHandler, Response } from "express";
-import openaiAgent from "../llm/lib/openai.agent";
-import fileUpload from "./lib/azure.file.upload";
-import browserPlaywright from "./lib/playwrite.browser";
-import testcaseParse from "./lib/testcase.parse";
 import { MODEL } from "../../shared/constant";
 import { PROMPT } from "../../shared/prompt";
+import openaiAgent from "../llm/lib/openai.agent";
+import fileUpload from "./lib/azure.file.upload";
+import generateScreenBuffer from "./lib/playwrite.browser";
+import testcaseParse from "./lib/testcase.parse";
 
 export default (async (req: Request, res: Response) => {
   try {
-    const {url} = req.body
+    const { url } = req.body;
 
-    const imageBuffer = await browserPlaywright(url);
+    const imageBuffer = await generateScreenBuffer(url);
 
     const fileUrl = await fileUpload(imageBuffer, "image/png");
 

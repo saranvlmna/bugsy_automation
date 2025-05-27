@@ -1,8 +1,10 @@
 import { Router } from "express";
-import browseruseBalance from "./browseruse.balance";
+import balanceFetch from "./balance.fetch";
+import runtask from "./runtask";
 
-const browserUse = Router();
+const agentRouter = Router();
 
-browserUse.get("/balance", browseruseBalance);
+agentRouter.get("/balance", balanceFetch);
+agentRouter.post("/task/run", runtask);
 
-export default browserUse;
+export default agentRouter;

@@ -1,13 +1,15 @@
 import { Request, RequestHandler, Response } from "express";
-import { bUseRunTask } from "../agent/lib";
+import { bUseGetTask, bUseRunTask } from "../agent/lib";
 
 export default (async (req: Request, res: Response) => {
   try {
     const { task } = req.body;
+
     const result = await bUseRunTask(task);
+    const taskDetails = await bUseGetTask(result.id,3);
 
     return res.status(200).json({
-      data: result,
+      data: taskDetails,
     });
   } catch (error) {
     if (error instanceof Error) {

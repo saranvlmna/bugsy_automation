@@ -1,5 +1,6 @@
 import express from "express";
 import "./config/env";
+import browserUse from "./src/agent/router";
 import systemRouter from "./src/system/router";
 
 const app = express();
@@ -13,6 +14,7 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/", systemRouter);
+app.use("/browseruse", browserUse);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

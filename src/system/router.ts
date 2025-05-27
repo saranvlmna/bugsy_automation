@@ -5,6 +5,6 @@ import testcaseWrite from "./testcase.write";
 const systemRouter = Router();
 
 systemRouter.post("/", testcaseWrite);
-systemRouter.post("/run", testcaseRun);
+systemRouter.post("/testcaserun", testcaseRun);
 
 export default systemRouter;

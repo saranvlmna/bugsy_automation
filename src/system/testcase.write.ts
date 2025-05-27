@@ -8,7 +8,7 @@ import { PROMPT } from "../../shared/prompt";
 
 export default (async (req: Request, res: Response) => {
   try {
-    const { url } = req.body;
+    const {url} = req.body
 
     const imageBuffer = await browserPlaywright(url);
 

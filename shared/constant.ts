@@ -15,3 +15,7 @@ export const BROWSER =
 export const URL = {
   BROWSER_USE: "https://api.browser-use.com/api/v1",
 };
+export const MIMETYPE = {
+  image: "image/png",
+  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+};

@@ -2,7 +2,7 @@ import axios from "axios";
 import { BROWSER, MODEL, URL } from "../../../../shared/constant";
 const BROWSER_USE_API_KEY = process.env.BROWSER_USE_API_KEY;
 
-export default async (task: string) => {
+export default async (task: any) => {
   try {
     const response = await axios.post(
       `${URL.BROWSER_USE}/run-task`,

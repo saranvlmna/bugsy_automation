@@ -3,9 +3,10 @@ import { bUseGetTask, bUseRunTask } from "../agent/lib";
 
 export default (async (req: Request, res: Response) => {
   try {
-    const { task } = req.body;
+    const file = req.file
+    if (!file) throw new Error('file missing!')
 
-    const result = await bUseRunTask(task);
+    const result = await bUseRunTask(file);
     const taskDetails = await bUseGetTask(result.id,3);
 
     return res.status(200).json({

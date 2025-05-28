@@ -1,6 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import readXlFile from "./lib/excel.file.read";
-// import { bUseGetTask, bUseRunTask } from "../agent/lib";
+import testcasePromptGenerate from "./lib/testcase.prompt.generate";
+import testcaseBulkrun from "./lib/testcase.bulkrun";
 
 export default (async (req: Request, res: Response) => {
   try {
@@ -8,14 +9,12 @@ export default (async (req: Request, res: Response) => {
     if (!file) throw new Error("file missing!");
 
     const excelJson = readXlFile(file.buffer);
-    console.log("File received:", excelJson);
-
-    // const result = await bUseRunTask(testCaseSummery);
-    // const taskDetails = await bUseGetTask(result.id,3);
-    // live taskDetails updation through socket
+    const testCasePrompt = await testcasePromptGenerate(excelJson);
+    await testcaseBulkrun(testCasePrompt);
 
     return res.status(200).json({
-      message: "file processing started.",
+      message: "file processed successfully",
+      data: "",
     });
   } catch (error) {
     if (error instanceof Error) {

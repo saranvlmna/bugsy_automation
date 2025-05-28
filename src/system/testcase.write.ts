@@ -27,7 +27,9 @@ export default (async (req: Request, res: Response) => {
     const excelUrl = await fileUpload(excelBuffer, MIMETYPE.xlsx);
 
     return res.status(200).json({
-      data: excelUrl,
+      data: {
+        excelUrl,
+      },
     });
   } catch (error) {
     if (error instanceof Error) {

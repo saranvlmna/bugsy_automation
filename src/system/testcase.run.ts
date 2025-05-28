@@ -1,16 +1,21 @@
 import { Request, RequestHandler, Response } from "express";
-import { bUseGetTask, bUseRunTask } from "../agent/lib";
+import readXlFile from "./lib/excel.file.read";
+// import { bUseGetTask, bUseRunTask } from "../agent/lib";
 
 export default (async (req: Request, res: Response) => {
   try {
-    const file = req.file
-    if (!file) throw new Error('file missing!')
+    const file = req.file;
+    if (!file) throw new Error("file missing!");
 
-    const result = await bUseRunTask(file);
-    const taskDetails = await bUseGetTask(result.id,3);
+    const excelJson = readXlFile(file.buffer);
+    console.log("File received:", excelJson);
+
+    // const result = await bUseRunTask(testCaseSummery);
+    // const taskDetails = await bUseGetTask(result.id,3);
+    // live taskDetails updation through socket
 
     return res.status(200).json({
-      data: taskDetails,
+      message: "file processing started.",
     });
   } catch (error) {
     if (error instanceof Error) {

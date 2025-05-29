@@ -1,12 +1,16 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
+import { createServer } from "node:http";
 import "./config/env";
-
+import socket from "./config/socket";
 import agentRouter from "./src/agent/router";
 import systemRouter from "./src/system/router";
 
-const app = express();
 const port = process.env.APP_PORT || 3000;
+
+const app = express();
+const server = createServer(app);
+socket(server);
 
 app.use(cors());
 
@@ -20,6 +24,6 @@ app.get("/", (_req, res) => {
 app.use("/", systemRouter);
 app.use("/agent", agentRouter);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

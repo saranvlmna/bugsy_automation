@@ -17,11 +17,10 @@ Avoid assumptions not visible in the screenshot.`,
   testCaseRunPrompt: `You are an AI test agent. Execute the following web UI test case in a browser environment. Follow each step precisely and confirm the result.
 
 Test Case Details:
+- URL to Test: {{url}}
 - Scenario: {{scenario}}
 - Pre-Condition: {{pre_condition}}
-- URL to Test: {{url}}
-- Test Steps:
-  {{test_steps}}
+- Test Steps: {{test_steps}}
 - Expected Result: {{expected_result}}
 
 After execution, provide:

@@ -1,6 +1,6 @@
 import { TestCase } from "../interfase/testcase";
 
-export default (text: string | null): TestCase[] => {
+export default (text: string | null, url: string): TestCase[] => {
   try {
     if (!text) return [];
 
@@ -8,8 +8,10 @@ export default (text: string | null): TestCase[] => {
       .replace(/^```json\s*/, "")
       .replace(/```$/, "")
       .trim();
+
     json = JSON.parse(json);
-    const transformedData = toDataTransform(json);
+
+    const transformedData = toDataTransform(json, url);
     return transformedData;
   } catch (err) {
     console.error(err);
@@ -17,7 +19,7 @@ export default (text: string | null): TestCase[] => {
   }
 };
 
-const toDataTransform = (testCases: any) => {
+const toDataTransform = (testCases: any, url: string) => {
   return testCases.map((item: any, index: any) => ({
     "Sl. No": index + 1,
     "Test Case ID": `TSC-${index + 1}`,
@@ -29,6 +31,7 @@ const toDataTransform = (testCases: any) => {
     "Test Data": "",
     "Expected Result": item.expected_result,
     "Actual Result": "",
+    Url: url,
     Status: "",
   }));
 };

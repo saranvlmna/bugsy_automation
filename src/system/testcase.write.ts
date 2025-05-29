@@ -20,7 +20,7 @@ export default (async (req: Request, res: Response) => {
       { type: "image_url", image_url: { url: imageUrl } },
     ]);
 
-    const result = parseTesacase(testCase);
+    const result = parseTesacase(testCase,url);
 
     const excelBuffer = await createExcelFile(result);
 

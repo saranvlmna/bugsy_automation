@@ -1,3 +1,4 @@
+import { io } from "../../../config/socket";
 import { bUseGetTask, bUseRunTask } from "../../agent/lib";
 
 export default async (testCaseArray: any) => {
@@ -8,10 +9,10 @@ export default async (testCaseArray: any) => {
         const task = await bUseRunTask(testCase);
         const taskDetails = await bUseGetTask(task?.id, 3);
         taskIds.push(task?.id);
-        
-        // push to socket for live url updation
+        io?.emit("taskUpdate", { taskDetails });
       })
     );
+    return taskIds;
   } catch (error) {
     console.log(error);
     throw error;

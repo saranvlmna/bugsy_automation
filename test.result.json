@@ -1,0 +1,80 @@
+[
+  {
+    "Sl. No": 1,
+    "Test Case ID": "TSC-1",
+    "Req. ID/User Story": "",
+    "Priority": "",
+    "Scenario/Test Case Description": "Test sidebar navigation functionality",
+    "Pre-Condition": "The application is loaded and sidebar is visible.",
+    "Test Steps": "Click on 'Violation Upload' in the sidebar.\nVerify that the 'Violation Upload' page is displayed.\nClick on 'Violation Search' in the sidebar.\nVerify that the 'Violation Search' page is displayed.\nClick on 'Dashboard' in the sidebar.\nVerify that the 'Dashboard' page is displayed.",
+    "Test Data": "",
+    "Expected Result": "The page should navigate to the respective section without any errors or delays.",
+    "Actual Result": "",
+    "Status": ""
+  },
+  {
+    "Sl. No": 2,
+    "Test Case ID": "TSC-2",
+    "Req. ID/User Story": "",
+    "Priority": "",
+    "Scenario/Test Case Description": "Test filter selection on violation search page",
+    "Pre-Condition": "User is on the 'Violation Search' page.",
+    "Test Steps": "Click on the 'Pending review' filter.\nVerify that violations with 'Pending review' status are listed.\nClick on the 'Approved' filter.\nVerify that violations with 'Approved' status are listed.\nClick on the 'Rejected' filter.\nVerify that violations with 'Rejected' status are listed.\nClick on the 'Show all violations' filter.\nVerify that all violations are listed irrespective of their status.",
+    "Test Data": "",
+    "Expected Result": "The data should filter correctly based on the selected filter with no errors.",
+    "Actual Result": "",
+    "Status": ""
+  },
+  {
+    "Sl. No": 3,
+    "Test Case ID": "TSC-3",
+    "Req. ID/User Story": "",
+    "Priority": "",
+    "Scenario/Test Case Description": "Test functionality of 'Clear filters' button",
+    "Pre-Condition": "A filter is active on the 'Violation Search' page.",
+    "Test Steps": "Click on 'Clear filters' button.\nVerify that all filters are cleared and the default data is displayed.",
+    "Test Data": "",
+    "Expected Result": "All active filters should be cleared and default violation data should be displayed.",
+    "Actual Result": "",
+    "Status": ""
+  },
+  {
+    "Sl. No": 4,
+    "Test Case ID": "TSC-4",
+    "Req. ID/User Story": "",
+    "Priority": "",
+    "Scenario/Test Case Description": "Test loading indicator visibility",
+    "Pre-Condition": "Verify that a data fetch action is initiated on the 'Violation Search' page.",
+    "Test Steps": "Observe if a loading indicator appears when data is being fetched.\nVerify the loading indicator disappears once data is loaded.",
+    "Test Data": "",
+    "Expected Result": "The loading indicator should be visible during data fetch and disappear after completion.",
+    "Actual Result": "",
+    "Status": ""
+  },
+  {
+    "Sl. No": 5,
+    "Test Case ID": "TSC-5",
+    "Req. ID/User Story": "",
+    "Priority": "",
+    "Scenario/Test Case Description": "Test search functionality in violation list",
+    "Pre-Condition": "User is on the 'Violation Search' page with data displayed.",
+    "Test Steps": "Enter a valid search term in the search box.\nClick the search icon or press enter.\nVerify the displayed violations match the search term.",
+    "Test Data": "",
+    "Expected Result": "Only violations matching the search term should be displayed, or a message if nothing matches.",
+    "Actual Result": "",
+    "Status": ""
+  },
+  {
+    "Sl. No": 6,
+    "Test Case ID": "TSC-6",
+    "Req. ID/User Story": "",
+    "Priority": "",
+    "Scenario/Test Case Description": "Test responsiveness of the Violation Search page",
+    "Pre-Condition": "The Violation Search page is open on a desktop browser.",
+    "Test Steps": "Resize the browser window to a smaller size.\nVerify that all elements are responsive and adjust according to the screen size.",
+    "Test Data": "",
+    "Expected Result": "The UI should remain usable and elements should not overlap or break layout on smaller screens.",
+    "Actual Result": "",
+    "Status": ""
+  }
+]

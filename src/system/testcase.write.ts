@@ -6,9 +6,26 @@ import fileUpload from "./lib/azure.file.upload";
 import createExcelFile from "./lib/excel.file.create";
 import browserPlaywright from "./lib/playwrite.browser";
 import parseTesacase from "./lib/testcase.parse";
+import { readFileSync } from "fs";
+import { resolve } from "path";
+const filePath = resolve(__dirname, "../../test.result.json");
+const jsonTestCase = JSON.parse(readFileSync(filePath, "utf-8"));
+const env = process.env.ENVIRONMENT;
 
 export default (async (req: Request, res: Response) => {
   try {
+    ///// development. need to remove this condition in production
+    if (env == "development") {
+      return res.status(200).json({
+        data: {
+          excelUrl:
+            "https://automationtestingtool.blob.core.windows.net/automation-testing-tool/file-56dd1d69-fefe-4a1c-ae66-ba6984c17524",
+          data:jsonTestCase,
+        },
+      });
+    }
+    /////
+
     const { url } = req.body;
 
     const imageBuffer = await browserPlaywright(url);
@@ -20,7 +37,7 @@ export default (async (req: Request, res: Response) => {
       { type: "image_url", image_url: { url: imageUrl } },
     ]);
 
-    const result = parseTesacase(testCase,url);
+    const result = parseTesacase(testCase, url);
 
     const excelBuffer = await createExcelFile(result);
 

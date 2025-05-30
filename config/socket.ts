@@ -8,7 +8,13 @@ export default (server: HTTPServer): SocketIOServer => {
     return io;
   }
 
-  io = new SocketIOServer(server);
+  io = io = new SocketIOServer(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
+  
 
   io.on("connection", (socket: Socket) => {
     console.log("socket connected");

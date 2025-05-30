@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
 import readXlFile from "./lib/excel.file.read";
-// import testcaseBulkrun from "./lib/testcase.bulkrun";
+import testcaseBulkrun from "./lib/testcase.bulkrun";
 import testcasePromptGenerate from "./lib/testcase.prompt.generate";
 const env = process.env.ENVIRONMENT;
 
@@ -26,7 +26,7 @@ export default (async (req: Request, res: Response) => {
 
     const testCasePrompt = await testcasePromptGenerate(excelJson);
 
-    // testcaseBulkrun(testCasePrompt);
+    await testcaseBulkrun(testCasePrompt);
 
     return res.status(200).json({
       message: "file processed successfully",

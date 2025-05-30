@@ -2,8 +2,10 @@ import axios from "axios";
 import { BROWSER, MODEL, URL } from "../../../../shared/constant";
 const BROWSER_USE_API_KEY = process.env.BROWSER_USE_API_KEY;
 
+let limit = 0;
 export default async (task: any) => {
   try {
+    if (limit >= 3) return " limit exceeded"; // development purpose only, remove this in production
     const response = await axios.post(
       `${URL.BROWSER_USE}/run-task`,
       {
@@ -32,6 +34,7 @@ export default async (task: any) => {
         },
       }
     );
+    limit++;
     return response.data;
   } catch (error) {
     console.log(error);

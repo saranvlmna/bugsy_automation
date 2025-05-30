@@ -4,12 +4,12 @@ import { bUseGetTask, bUseRunTask } from "../../agent/lib";
 export default (testCaseArray: any[]) => {
   try {
     let currentTask = 0;
+    let taskUpdateEmitted = false;
     const runNextTask = async () => {
       if (currentTask >= testCaseArray.length) return;
 
       const task = await bUseRunTask(testCaseArray[currentTask]);
       let pushedTaskId: any = null;
-      console.log("task", task);
       if (!task?.id) return;
 
       const interval = setInterval(async () => {
@@ -23,15 +23,17 @@ export default (testCaseArray: any[]) => {
                 status: taskDetails.status,
                 live_url: taskDetails.live_url,
               });
+              taskUpdateEmitted = false;
             }
             pushedTaskId = task.id;
           }
 
-          if (taskDetails?.status === "finished") {
+          if (taskDetails?.status === "finished" && !taskUpdateEmitted) {
             io?.emit("taskUpdate", {
               id: taskDetails.id,
               status: taskDetails.status,
             });
+            taskUpdateEmitted = true;
             clearInterval(interval);
             currentTask++;
             runNextTask();

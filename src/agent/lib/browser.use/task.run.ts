@@ -38,8 +38,8 @@ export default async (task: any) => {
 
     limit++;
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
-    throw error;
+    throw new Error(error?.response?.data?.detail || "Internal server error");
   }
 };

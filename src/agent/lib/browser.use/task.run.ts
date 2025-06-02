@@ -5,7 +5,8 @@ const BROWSER_USE_API_KEY = process.env.BROWSER_USE_API_KEY;
 let limit = 0;
 export default async (task: any) => {
   try {
-    if (limit >= 3) return " limit exceeded"; // development purpose only, remove this in production
+    if (limit >= 3) throw new Error("AI agent limit exceeded!"); // development purpose only, remove this in production
+
     const response = await axios.post(
       `${URL.BROWSER_USE}/run-task`,
       {
@@ -34,6 +35,7 @@ export default async (task: any) => {
         },
       }
     );
+
     limit++;
     return response.data;
   } catch (error) {

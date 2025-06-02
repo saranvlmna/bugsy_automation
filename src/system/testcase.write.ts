@@ -1,27 +1,27 @@
 import { Request, RequestHandler, Response } from "express";
+import { readFileSync } from "fs";
+import { resolve } from "path";
 import { MIMETYPE, MODEL } from "../../shared/constant";
 import { PROMPT } from "../../shared/prompt";
+import Responder from "../../shared/responder";
 import openaiAgent from "../llm/lib/openai.agent";
 import fileUpload from "./lib/azure.file.upload";
 import createExcelFile from "./lib/excel.file.create";
 import browserPlaywright from "./lib/playwrite.browser";
 import parseTesacase from "./lib/testcase.parse";
-import { readFileSync } from "fs";
-import { resolve } from "path";
 const filePath = resolve(__dirname, "../../test.result.json");
 const jsonTestCase = JSON.parse(readFileSync(filePath, "utf-8"));
 const env = process.env.ENVIRONMENT;
 
 export default (async (req: Request, res: Response) => {
+  const responder = new Responder(res);
   try {
     ///// development. need to remove this condition in production
     if (env == "development") {
-      return res.status(200).json({
-        data: {
-          excelUrl:
-            "https://automationtestingtool.blob.core.windows.net/automation-testing-tool/file-56dd1d69-fefe-4a1c-ae66-ba6984c17524",
-          data:jsonTestCase,
-        },
+      return responder.success("file processed successfully", {
+        excelUrl:
+          "https://automationtestingtool.blob.core.windows.net/automation-testing-tool/file-56dd1d69-fefe-4a1c-ae66-ba6984c17524",
+        data: jsonTestCase,
       });
     }
     /////
@@ -43,17 +43,11 @@ export default (async (req: Request, res: Response) => {
 
     const excelUrl = await fileUpload(excelBuffer, MIMETYPE.xlsx);
 
-    return res.status(200).json({
-      data: {
-        excelUrl,
-        data: result,
-      },
+    return responder.success("file processed successfully", {
+      excelUrl,
+      data: result,
     });
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Server error");
-    }
+    return responder.error(error instanceof Error ? error.message : "Server error", 500);
   }
 }) as unknown as RequestHandler;

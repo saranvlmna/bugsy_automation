@@ -1,10 +1,12 @@
 import { Request, RequestHandler, Response } from "express";
+import Responder from "../../shared/responder";
 import readXlFile from "./lib/excel.file.read";
 import testcaseBulkrun from "./lib/testcase.bulkrun";
 import testcasePromptGenerate from "./lib/testcase.prompt.generate";
 const env = process.env.ENVIRONMENT;
 
 export default (async (req: Request, res: Response) => {
+  const responder = new Responder(res);
   try {
     const file = req.file;
     const data = req?.body?.data;
@@ -14,10 +16,7 @@ export default (async (req: Request, res: Response) => {
 
     ///// If the environment is development, skip processing and return a success message
     if (env === "development") {
-      return res.status(200).json({
-        message: "file processed successfully",
-        data: "",
-      });
+      return responder.success("file processed successfully");
     }
     /////
 
@@ -26,17 +25,10 @@ export default (async (req: Request, res: Response) => {
 
     const testCasePrompt = await testcasePromptGenerate(excelJson);
 
-    await testcaseBulkrun(testCasePrompt);
+    const result = await testcaseBulkrun(testCasePrompt);
 
-    return res.status(200).json({
-      message: "file processed successfully",
-      data: "",
-    });
+    return responder.success("file processed sucessfully", result);
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Server error");
-    }
+    return responder.error(error instanceof Error ? error.message : "Server error", 500);
   }
 }) as unknown as RequestHandler;

@@ -1,5 +1,8 @@
 import { Request, RequestHandler, Response } from "express";
+import { MIMETYPE } from "../../shared/constant";
 import Responder from "../../shared/responder";
+import fileUpload from "./lib/azure.file.upload";
+import createExcelFile from "./lib/excel.file.create";
 import readXlFile from "./lib/excel.file.read";
 import testcaseBulkrun from "./lib/testcase.bulkrun";
 import testcasePromptGenerate from "./lib/testcase.prompt.generate";
@@ -27,7 +30,13 @@ export default (async (req: Request, res: Response) => {
 
     const result = await testcaseBulkrun(testCasePrompt);
 
-    return responder.success("file processed sucessfully", result);
+    excelJson.map((item: any, index: number) => (item["Actual Result"] = result[index]?.output || "No result"));
+
+    const excelBuffer = await createExcelFile(excelJson);
+
+    const excelUrl = await fileUpload(excelBuffer, MIMETYPE.xlsx);
+
+    return responder.success("file processed sucessfully", excelUrl);
   } catch (error) {
     return responder.error(error instanceof Error ? error.message : "Server error", 500);
   }

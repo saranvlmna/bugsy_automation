@@ -5,14 +5,15 @@ export default async (testCaseArray: any[]) => {
   try {
     const totalTasks = testCaseArray.length;
     console.log("Total tasks to run:", totalTasks);
-
+    const resultArray: any[] = [];
     for (let i = 0; i < totalTasks; i++) {
       console.log("Running task:", i + 1, "of", totalTasks);
-      await runNewTask(testCaseArray[i]);
+      const result = await runNewTask(testCaseArray[i]);
+      resultArray.push(result);
     }
 
     console.log("All tasks have been completed.");
-    return "done";
+    return resultArray;
   } catch (error) {
     console.error("runTask error:", error);
     throw error;
@@ -51,7 +52,7 @@ const runNewTask = async (testCase: any) => {
 
         if (taskEmitted && taskUpdateEmitted) {
           clearInterval(intervalId);
-          resolve(); // Only resolve when both emissions are done
+          return resolve(taskDetails);
         }
       } catch (err) {
         clearInterval(intervalId);

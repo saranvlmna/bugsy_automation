@@ -8,7 +8,7 @@ export default async (testCaseArray: any[]) => {
     const resultArray: any[] = [];
     for (let i = 0; i < totalTasks; i++) {
       console.log("Running task:", i + 1, "of", totalTasks);
-      const result = await runNewTask(testCaseArray[i]);
+      const result = await runNewTask(testCaseArray[i], { totalTasks, currentTask: i + 1 });
       resultArray.push(result);
     }
 
@@ -20,7 +20,7 @@ export default async (testCaseArray: any[]) => {
   }
 };
 
-const runNewTask = async (testCase: any) => {
+const runNewTask = async (testCase: any, runningStatus: any) => {
   const task = await bUseRunTask(testCase);
   if (!task?.id) return;
 
@@ -38,6 +38,7 @@ const runNewTask = async (testCase: any) => {
             id: taskDetails.id,
             status: taskDetails.status,
             live_url: taskDetails.live_url,
+            runningStatus,
           });
           taskEmitted = true;
         }

@@ -36,7 +36,7 @@ export default (async (req: Request, res: Response) => {
 
     const excelUrl = await fileUpload(excelBuffer, MIMETYPE.xlsx);
 
-    return responder.success("file processed sucessfully", excelUrl);
+    return responder.success("file processed sucessfully", { excelUrl, excelJson });
   } catch (error) {
     return responder.error(error instanceof Error ? error.message : "Server error", 500);
   }

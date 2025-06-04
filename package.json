@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon server.ts"
   },
   "repository": {
     "type": "git",
@@ -21,16 +21,26 @@
   "description": "automation testing tool",
   "dependencies": {
     "@azure/storage-blob": "^12.27.0",
+    "@langchain/openai": "^0.5.11",
+    "@types/socket.io": "^3.0.1",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "multer": "^2.0.0",
     "openai": "^4.98.0",
     "playwright": "^1.52.0",
-    "uuid": "^11.1.0"
+    "socket.io": "^4.8.1",
+    "uuid": "^11.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
+    "@types/multer": "^1.4.12",
     "@types/node": "^22.15.18",
     "nodemon": "^3.1.10",
+    "openapi-typescript": "^7.8.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

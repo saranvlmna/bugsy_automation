@@ -4,6 +4,7 @@ import Responder from "../../shared/responder";
 import fileUpload from "./lib/azure.file.upload";
 import createExcelFile from "./lib/excel.file.create";
 import readXlFile from "./lib/excel.file.read";
+import testcaseAnalyze from "./lib/testcase.analyze";
 import testcaseBulkrun from "./lib/testcase.bulkrun";
 import testcasePromptGenerate from "./lib/testcase.prompt.generate";
 const env = process.env.ENVIRONMENT;
@@ -28,15 +29,18 @@ export default (async (req: Request, res: Response) => {
 
     const testCasePrompt = await testcasePromptGenerate(excelJson);
 
-    const result = await testcaseBulkrun(testCasePrompt);
+    const testResult = await testcaseBulkrun(testCasePrompt);
+    const analyzedResult = testcaseAnalyze(testResult, excelJson);
 
-    excelJson.map((item: any, index: number) => (item["Actual Result"] = result[index]?.output || "No result"));
-
-    const excelBuffer = await createExcelFile(excelJson);
+    const excelBuffer = await createExcelFile(analyzedResult.testResult);
 
     const excelUrl = await fileUpload(excelBuffer, MIMETYPE.xlsx);
 
-    return responder.success("file processed sucessfully", { excelUrl, excelJson });
+    return responder.success("file processed sucessfully", {
+      url: excelUrl,
+      data: analyzedResult.testResult,
+      analyzedSummary: analyzedResult.summary,
+    });
   } catch (error) {
     return responder.error(error instanceof Error ? error.message : "Server error", 500);
   }

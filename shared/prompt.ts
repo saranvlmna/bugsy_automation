@@ -24,7 +24,7 @@ Test Case Details:
 - Expected Result: {{expected_result}}
 
 After execution, provide:
-1. Pass/Fail status.
+1. Status: Pass/Fail.
 3. Any deviations or unexpected behaviors.
 `,
 };

@@ -32,7 +32,7 @@ const runNewTask = async (testCase: any, runningStatus: any) => {
       try {
         const taskDetails = await bUseGetTask(task.id, 0);
 
-        if (!taskEmitted && taskDetails?.live_url) {
+        if (!taskEmitted && taskDetails?.live_url && taskDetails?.status === "running") {
           io?.emit("newTask", {
             task: taskDetails.task,
             id: taskDetails.id,

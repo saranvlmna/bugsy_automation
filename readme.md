@@ -16,29 +16,11 @@ This project is an automation testing tool that generates manual UI test cases f
 **Description:**  
 Generate manual UI test cases from a given webpage URL.
 
-**Request Body:**
-```json
-{
-  "url": "https://example.com"
-}
-
-## Response
-{
-  "data": [
-    {
-      "title": "Test Case Title",
-      "objective": "Test objective description",
-      "preconditions": "Any preconditions (optional)",
-      "steps": ["Step 1", "Step 2", "..."],
-      "expectedResult": "Expected result description"
-    }
-    // ...more test cases
-  ]
-}
-
-
 ## 💛 Support
 
 If you find this project useful and want to support my work:  
-☕ [Buy Me a Coffee](https://coff.ee/saranjith)
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/saranjith)
+
+
 
